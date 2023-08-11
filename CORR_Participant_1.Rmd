@@ -1,0 +1,149 @@
+---
+title: "TP : Partie 1: corrigé."
+author: " K.Meziani"
+format:
+  html:
+    self-contained: true
+    theme: [cosmo, theme.scss]
+    toc: true
+    number-sections: true
+    html-math-method: katex
+    code-copy: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+
+---
+
+
+
+
+
+## Preliminary {.unnumbered}
+
+
+
+#  Bases et intuition de la théorie des probabilités
+
+
+
+## Fixer la $seed$
+
+
+__Question 1:__ Fixer la "graine" aléatoire (random number generator) ce qui de fixer les résultats.
+
+
+```{r}
+set.seed(1234)
+```
+
+
+
+## Tirage suivant une loi
+
+__Question 2:__
+Pour faire un tirage selon la loi "$*$", il faut ajouter `r` devant le nom de $*$. Tirer,  au hasard n=5 valeurs selon une loi normale $\mathcal N(m,\sigma)$ de moyenne mean=10 et d'écart type sd=2. (commande `rnorm(n,mean,sd)`).
+
+
+
+
+```{r}
+rnorm(5,10,2)
+
+```
+
+## Quartile
+
+
+__Question 3:__ Pour afficher les quartiles de la loi "$*$", il faut ajouter `q`devant le nom de $*$. Afficher le premier quartile (ordre 0.25) de la loi $\mathcal N(mean,sd)$ de moyenne mean=10 et d'écart type sd=2. (commande  `qnorm(ordre,mean,sd)`).
+
+ 
+```{r }
+qnorm(0.25,10,2)
+```
+
+##  Calcul de probabilités
+
+
+
+
+__Question 4:__
+Pour afficher les probabilités ponctuelles de la loi "$*$", il faut ajouter `d` devant le nom de $*$. Afficher les probablités qu'une v.a. $X$ de loi Poisson de paramètre $\lambda=4$; $\mathcal P(\lambda)$) a de prendre les valeurs $0$, $1$ et $2$. (commande  `dpois(0:2,lambda)`.
+
+
+```{r}
+dpois(0:2, 4) 
+```
+
+
+##  Calcul de probabilités
+
+
+
+
+__Question 5:__ Évaluons plusieurs probabilités d'un coup. Afficher les probabilités d'une v.a. binomiale
+$\mathcal B(n,p)$, $n=10$ et $p=1/4$. (commande  `dbinom(0:n, n,p)`). Vérifier que la somme fait 1.
+
+
+```{r}
+V=dbinom(0:10, 10, 0.25); V
+sum(V)
+```
+
+
+
+##  Affichage d'une valeur de la fonction de répartition 
+
+
+
+
+__Question 6:__ Pour afficher la valeur de la fonction de répartition de la loi"$*$", ajouter `d` devant le nom de $*$.   Afficher la probablité qu'une v.a. $X$ de loi Normale
+$\mathcal N(mean,sd)$ de moyenne mean=10 et d'écart type sd=2 soit inférieure à 12. (commande `pnorm(12,mean,sd)`). 
+
+
+
+
+```{r }
+pnorm(12,10,2)
+```
+
+
+
+
+
+
+
+
+#  Statistiques mathématiques : Estimation et tests
+
+
+##  Tirer un échantillon suivant une loi uniforme
+
+__Question 1:__
+Tirer au hasard un échantillon $Y$ de 100 valeurs selon une loi uniforme $U(0,1)$ (commande `runif()`). (Mettre une seed)
+
+
+```{r }
+set.seed(2021)
+Y=runif(100,0,1)
+
+```
+
+
+
+##  Test de Shapiro
+
+__Question 2:__ 
+$Y$ est-il issu d'une loi normale $\mathcal N(0,1)$? (Test de Shapiro (commande `shapiro.test()`)
+
+
+
+
+```{r }
+shapiro.test(Y)
+```
+
+
+__$\Rightarrow$ petite $p$-$value$, on  rejette  $\mathcal H_0$, l'echantillon $Y$ n'est pas issu d'une $\mathcal N(0,1)$.__
+
+
+
