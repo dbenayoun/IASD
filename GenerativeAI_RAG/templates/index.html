@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Response Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #000;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+        }
+        button {
+            background-color: #ff8c00; /* Orange */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .response-container {
+            margin-top: 20px;
+            background-color: #000; /* Black */
+            color: #ff8c00; /* Orange */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        button, .copy-button {
+            background-color: #ff8c00; /* Orange */
+            color: #fff;
+            border: none;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .copy-button {
+            background-color: #333; /* Darker background for the copy button */
+            width: auto; /* Auto-width based on content */
+            padding: 10px 20px;
+            margin-top: 0; /* Align with the response text */
+        }
+        select {
+        width: 100%; /* Match the width of textarea */
+        padding: 10px; /* Padding to match textarea and button */
+        margin-bottom: 20px; /* Margin to match textarea */
+        border-radius: 5px; /* Border-radius to match textarea and button */
+        border: 1px solid #ccc; /* Border to match textarea */
+        box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+        background-color: #fff; /* Background color to match form */
+        font-family: Arial, sans-serif; /* Font to match overall design */
+        font-size: 16px; /* Font size to match button */
+        cursor: pointer; /* Cursor to match button */
+        }
+        .dataframe {
+        width: 100%;
+        border-collapse: collapse;
+        }
+        .dataframe th, .dataframe td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+        }
+        .dataframe th {
+        background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tweet Response Generator for Support Service</h1>
+    <form id="tweetForm">
+        <textarea name="tweet" rows="4" cols="50" placeholder="Enter the tweet here..." required></textarea>
+        <!-- Dropdown list for company selection -->
+        <p>Choose a Company:</p>
+        <select name="company" required>
+            <!-- <option value="Any">Any</option> -->
+            <option value="AmazonHelp">AmazonHelp</option>
+            <option value="AppleSupport">AppleSupport</option>
+            <option value="SpotifyCares">SpotifyCares</option>
+            <option value="Uber_Support">Uber_Support</option>
+        </select>
+        <p>Choose the number of closest tweets to use (as an integer):</p>
+    <input type="number" name="# closest tweets" min="1" placeholder="# closest tweets" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
+        <button type="button" onclick="generateResponse()">Generate Response</button>
+    </form>
+    <div id="responseContainer" class="response-container" style="display: none;">
+        <h2>Generated Response:</h2>
+        <p id="generatedResponse"></p>
+        <button class="copy-button" onclick="copyToClipboard()">Copy to Clipboard</button>
+        <!-- <h2>Original Tweet:</h2> -->
+        <!-- <p id="originalTweet"></p> -->
+    </div>
+    <div id="dataframeContainer" style="margin-top: 20px;">
+        <h2 id="Data used to Generate the Response:" style="color: #ff8c00;">Data used to Generate the Response:</h2>
+        <div id="dataframeContent"></div>
+    </div>
+    <script>
+        function generateResponse() {
+            var formData = new FormData(document.getElementById('tweetForm'));
+            var selectedCompany = formData.get('company');
+            fetch('/generate-response', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('responseContainer').style.display = 'block';
+                document.getElementById('generatedResponse').textContent = data.response;
+                document.getElementById('dataframeContent').innerHTML = data.df_html;
+                // document.getElementById('originalTweet').textContent = formData.get('tweet');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        function copyToClipboard() {
+            const responseText = document.getElementById('generatedResponse').innerText;
+            navigator.clipboard.writeText(responseText).then(() => {
+                alert('Response copied to clipboard!');
+            }).catch(err => {
+                console.error('Error in copying text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
