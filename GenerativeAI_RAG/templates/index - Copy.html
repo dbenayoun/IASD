@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Response Generator</title>
+</head>
+<body>
+    <h1>Tweet Response Generator for Support Service</h1>
+    <form action="/generate-response" method="post">
+        <textarea name="tweet" rows="4" cols="50" placeholder="Enter the tweet here..." required></textarea>
+        <br>
+        <button type="submit">Generate Response</button>
+    </form>
+    {% if response %}
+        <h2>Generated Response:</h2>
+        <p>{{ response }}</p>
+        <h2>Original Tweet:</h2>
+        <p>{{ tweet }}</p>
+    {% endif %}
+</body>
+</html>
