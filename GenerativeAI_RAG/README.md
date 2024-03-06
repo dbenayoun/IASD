@@ -22,6 +22,11 @@ This documentation provides an overview of the backend operations for a Flask ap
 
 The project uses a dataset of customer tweets, including company responses, to simulate a real-world customer service scenario. This dataset is preprocessed and utilized to populate the ChromaDb collection, serving as the foundation for the RAG system.
 
+## Front End 
+
+![Front End Example](UE.png)
+
+
 ## Conclusion
 
 By combining state-of-the-art NLP models with efficient vector storage and retrieval systems, the backend setup for this Flask application showcases a sophisticated approach to automating customer service responses. The integration of RAG into the response generation process ensures that replies are not only contextually relevant but also maintain a consistent tone and style, reflective of previous successful interactions.
