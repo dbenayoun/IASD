@@ -15,7 +15,7 @@ Read the white paper for deails about the improved repartition joined
 
 ![reshuffle datset](2024-09-24_21-31-13.png)
 
-8. create a feature with delays < 15min, between 15 and 60min, and above 60min => tran, test
+8. create a feature delay given a threshold (or may be few classes ?) , and above 60min => tran, test
 9. Random forest : 
 
 Input:
