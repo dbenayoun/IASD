@@ -4,6 +4,7 @@
 2. treat missing values
 3. focus on delayed flights only, filtered out diverted and canceled flights
 4. remove weather not related to airport locations 
+![join](2024-09-24_21-48-38.png)
 
 5. create the join table : create a tuple, {array(flight info(origin airport, destination,etc)), array(weather obesrvations at origin airport from the scheduled departure time back 12hours every hour), array(weather obesrvations at destination airport from the scheduled arrival time back 12hours every hour), class(on time or delayeda according to a threshold)}
 Read the white paper for deails about the improved repartition joined 
