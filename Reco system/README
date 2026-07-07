@@ -1,1 +1,6 @@
+# Recommender System — MovieLens
 
+Building a movie recommendation system on the MovieLens dataset.
+
+- `movielens_demo.ipynb` — dataset exploration and demo
+- `project_rs.ipynb` — main recommender system project (model building and evaluation)
